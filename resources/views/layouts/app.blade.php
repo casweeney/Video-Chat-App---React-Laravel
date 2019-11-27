@@ -11,6 +11,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    @if(auth()->user())
+    <script>
+        window.user = {
+            id: {{ auth()->id() }},
+            name: "{{ auth()->user()->name }}"
+        };
+
+        window.csrfToken = "{{ csrf_token() }}";
+    </script>
+    @endif
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -21,7 +31,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="container">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
